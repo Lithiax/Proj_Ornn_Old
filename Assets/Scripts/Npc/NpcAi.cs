@@ -7,12 +7,17 @@ public class NpcAi : Interactable
     Animator anim;
     Vector2 movement;
     public float speed = 2;
-    public bool ordering = false;
-    private bool orderSprites = false;
 
-    public GameObject[] itemPool;
+    public Item[] itemPool;
     private static NpcAi npcInstance;
     private GameObject cloud;
+    public GameObject itemSprite;
+    public GameObject orderSystem;
+    Item order;
+
+    public bool ordering = false;
+    bool orderSprites = false;
+    public bool orderTaken = false;
 
     void Awake()
     {
@@ -32,21 +37,25 @@ public class NpcAi : Interactable
     {
         anim = GetComponent<Animator>();
         cloud = transform.GetChild(0).gameObject;
-}
+
+        //Temporary code
+        order = itemPool[0];
+    }
 
     void Order()
     {
         cloud.SetActive(false);
-        orderSprites = false;
-        ordering = false;
+        orderTaken = true;
+        orderSystem.GetComponent<OrderManager>().UpdateOrders(order);
     }
 
     void initiateOrderSprites()
     {
+        //Change itemPool[0] to itemSelected when more than 1 item is made.
         cloud.SetActive(true);
-        GameObject item = Instantiate(itemPool[0], cloud.transform);
-        item.transform.position = cloud.transform.position;
+        itemSprite.GetComponent<SpriteRenderer>().sprite = itemPool[0].sprite;
         orderSprites = true;
+        itemPool[0].printRecipe();
     }
 
     void Update()
