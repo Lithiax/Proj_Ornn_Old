@@ -9,4 +9,13 @@ public class Item : ScriptableObject
     public Sprite sprite;
     public string job;
     public string[] recipe;
+
+    public void printRecipe()
+    {
+        if (recipe != null)
+            foreach (string recipes in recipe)
+            {
+                Debug.Log(recipes);
+            }
+    }
 }
