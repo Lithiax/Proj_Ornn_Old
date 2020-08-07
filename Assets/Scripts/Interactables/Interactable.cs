@@ -5,7 +5,6 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     protected bool playerInRange = false;
-
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -23,6 +22,7 @@ public class Interactable : MonoBehaviour
     {
         if (playerInRange == true && Input.GetKeyDown(KeyCode.E))
             return true;
+      
         else
             return false;
     }

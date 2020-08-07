@@ -13,27 +13,14 @@ public class PlayerController : MonoBehaviour
 
     private static PlayerController playerInstance;
     public string currentOrder;
-
-    void Awake()
-    {
-        DontDestroyOnLoad(this);
-
-        if (playerInstance == null)
-        {
-            playerInstance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spr = GetComponent<SpriteRenderer>();
+        transform.position = PlayerData.playerPosition;
     }
+
 
     void Update()
     {
@@ -47,6 +34,9 @@ public class PlayerController : MonoBehaviour
             spr.flipX = true;
         if (movement.x < 0)
             spr.flipX = false;
+
+        //To be changed, not sure if efficient or stupid as fuck but it obviously works duh
+        PlayerData.playerPosition = transform.position;
     }
 
     void FixedUpdate()

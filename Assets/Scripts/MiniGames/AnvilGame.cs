@@ -15,7 +15,6 @@ public class AnvilGame : MonoBehaviour
         {
             keys.Add ( keyPool[Random.Range(0, 3)]);
             keys[i] = Instantiate(keys[i], transform.position + new Vector3(0, 0 + (i * 0.80f), 0), transform.rotation);
-            Debug.Log(keys[i].name);
         }    
     }
 
@@ -28,7 +27,6 @@ public class AnvilGame : MonoBehaviour
                 if (c == keys[0].name[0])
                 {
                     Debug.Log("HIT!");
-                    Destroy(keys[0]);
                     keys.Remove(keys[0]);
 
                     foreach (GameObject key in keys)
@@ -41,7 +39,6 @@ public class AnvilGame : MonoBehaviour
 
         if (!keys.Any())
         {
-            Debug.Log("DONE!");
             SceneManager.LoadScene("Woodlands");
         }
     }
