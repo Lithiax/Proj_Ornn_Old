@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcAi : Interactable
+public class NpcAi : MonoBehaviour
 {
     Animator anim;
     Vector2 movement;
@@ -13,11 +13,14 @@ public class NpcAi : Interactable
     private GameObject cloud;
     public GameObject itemSprite;
     public GameObject orderSystem;
+    public GameObject interactArea;
     Item order;
 
-    public bool ordering = false;
+    //states
+    bool ordering = false;
     bool orderSprites = false;
-    public bool orderTaken = false;
+    bool orderTaken = false;
+    bool orderComplete;
 
     void Awake()
     {
@@ -37,18 +40,27 @@ public class NpcAi : Interactable
     {
         anim = GetComponent<Animator>();
         cloud = transform.GetChild(0).gameObject;
-
         //Temporary code
         order = itemPool[0];
     }
+    void Ordering()
+    {
+        Debug.Log("ordering");
+        if (!orderSprites)
+            initiateOrderSprites();
 
-    void Order()
+        if (interactArea.GetComponent<Interactable>().interacted)   
+            OrderTaken();
+    }
+    void OrderTaken()
     {
         cloud.SetActive(false);
+        orderSprites = false;
+
         orderTaken = true;
+        ordering = false;
         orderSystem.GetComponent<OrderManager>().UpdateOrders(order);
     }
-
     void initiateOrderSprites()
     {
         //Change itemPool[0] to itemSelected when more than 1 item is made.
@@ -57,20 +69,18 @@ public class NpcAi : Interactable
         orderSprites = true;
         itemPool[0].printRecipe();
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "NPCStopper")
+        {
+            speed = 0;
+            Ordering();
+        }
+    }
 
     void Update()
     {
         transform.Translate(Vector2.down * speed * Time.deltaTime);
         anim.SetFloat("Speed", speed);
-
-        //Triggers in NpcStopper
-        if (ordering)
-        {
-            if (!orderSprites)
-                initiateOrderSprites();
-
-            if (interact())
-                Order();
-        }
     }
 }

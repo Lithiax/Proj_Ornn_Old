@@ -34,13 +34,19 @@ public class PlayerController : MonoBehaviour
             spr.flipX = true;
         if (movement.x < 0)
             spr.flipX = false;
-
-        //To be changed, not sure if efficient or stupid as fuck but it obviously works duh
-        PlayerData.playerPosition = transform.position;
     }
 
     void FixedUpdate()
     {
         rb2d.MovePosition(rb2d.position + movement * speed * Time.fixedDeltaTime);
+    }
+    public void savePosition()
+    {
+        //PlayerData.playerPosition = transform.position;
+    }
+
+    void OnDestroy()
+    {
+        PlayerData.playerPosition = transform.position;
     }
 }
