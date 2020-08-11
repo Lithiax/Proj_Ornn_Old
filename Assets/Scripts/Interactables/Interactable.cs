@@ -18,27 +18,15 @@ public class Interactable : MonoBehaviour
     {
         playerInRange = false;
     }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        Debug.Log("stay");
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("interacted");
-            interacted = true;
-        }
-    }
     public virtual bool interact()
     {
         if (playerInRange == true && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("trueeee");
             return true;
         }
       
         else
         {
-            Debug.Log("nah");
             return false;
         }
     }

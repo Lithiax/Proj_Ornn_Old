@@ -17,10 +17,10 @@ public class NpcAi : MonoBehaviour
     Item order;
 
     //states
-    bool ordering = false;
-    bool orderSprites = false;
-    bool orderTaken = false;
-    bool orderComplete;
+    public bool ordering = false;
+    public bool orderSprites = false;
+    public bool orderTaken = false;
+    public bool orderComplete;
 
     void Awake()
     {
@@ -43,7 +43,7 @@ public class NpcAi : MonoBehaviour
         //Temporary code
         order = itemPool[0];
     }
-    void Ordering()
+    public void Ordering()
     {
         Debug.Log("ordering");
         if (!orderSprites)
@@ -52,7 +52,7 @@ public class NpcAi : MonoBehaviour
         if (interactArea.GetComponent<Interactable>().interacted)   
             OrderTaken();
     }
-    void OrderTaken()
+    public void OrderTaken()
     {
         cloud.SetActive(false);
         orderSprites = false;
@@ -61,7 +61,7 @@ public class NpcAi : MonoBehaviour
         ordering = false;
         orderSystem.GetComponent<OrderManager>().UpdateOrders(order);
     }
-    void initiateOrderSprites()
+    public void initiateOrderSprites()
     {
         //Change itemPool[0] to itemSelected when more than 1 item is made.
         cloud.SetActive(true);
@@ -74,7 +74,7 @@ public class NpcAi : MonoBehaviour
         if(collision.tag == "NPCStopper")
         {
             speed = 0;
-            Ordering();
+            anim.SetBool("Ordering", true);
         }
     }
 
