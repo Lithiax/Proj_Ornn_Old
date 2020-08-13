@@ -9,32 +9,16 @@ public class NpcAi : MonoBehaviour
     public float speed = 2;
 
     public Item[] itemPool;
-    private static NpcAi npcInstance;
-    private GameObject cloud;
+
+    public GameObject cloud;
     public GameObject itemSprite;
     public GameObject orderSystem;
     public GameObject interactArea;
-    Item order;
+    public Item order;
+    public string state;
 
     //states
-    public bool ordering = false;
     public bool orderSprites = false;
-    public bool orderTaken = false;
-    public bool orderComplete;
-
-    void Awake()
-    {
-        DontDestroyOnLoad(this);
-
-        if (npcInstance == null)
-        {
-            npcInstance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void Start()
     {
@@ -42,24 +26,18 @@ public class NpcAi : MonoBehaviour
         cloud = transform.GetChild(0).gameObject;
         //Temporary code
         order = itemPool[0];
-    }
-    public void Ordering()
-    {
-        Debug.Log("ordering");
-        if (!orderSprites)
-            initiateOrderSprites();
 
-        if (interactArea.GetComponent<Interactable>().interacted)   
-            OrderTaken();
-    }
-    public void OrderTaken()
-    {
-        cloud.SetActive(false);
-        orderSprites = false;
+        //shitty asf if the npc goes to zero then oh well lmaoooo 
+        if (NPCData.npcPosition != Vector3.zero)
+            transform.position = NPCData.npcPosition;
 
-        orderTaken = true;
-        ordering = false;
-        orderSystem.GetComponent<OrderManager>().UpdateOrders(order);
+        if (NPCData.setState != null)
+        {
+            state = NPCData.setState;
+            anim.SetBool(state, true);
+        }
+
+        speed = NPCData.npcSpeed;  
     }
     public void initiateOrderSprites()
     {
@@ -71,16 +49,23 @@ public class NpcAi : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "NPCStopper")
+        if(collision.tag == "NPCStopper" && state != "OrderTaken")
         {
+            //ordering state
             speed = 0;
             anim.SetBool("Ordering", true);
         }
     }
-
     void Update()
     {
         transform.Translate(Vector2.down * speed * Time.deltaTime);
         anim.SetFloat("Speed", speed);
+    
+    }
+    void OnDestroy()
+    {
+        NPCData.npcPosition = transform.position;
+        NPCData.setState = state;
+        NPCData.npcSpeed = speed;
     }
 }

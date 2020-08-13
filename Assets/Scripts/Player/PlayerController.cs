@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     SpriteRenderer spr;
 
-    private static PlayerController playerInstance;
     public string currentOrder;
     void Start()
     {
@@ -39,10 +38,6 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         rb2d.MovePosition(rb2d.position + movement * speed * Time.fixedDeltaTime);
-    }
-    public void savePosition()
-    {
-        //PlayerData.playerPosition = transform.position;
     }
 
     void OnDestroy()

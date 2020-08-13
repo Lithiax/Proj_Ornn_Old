@@ -2400,9 +2400,14 @@ MonoBehaviour:
   speed: 2
   itemPool:
   - {fileID: 11400000, guid: 6ac80fc1816a39e4b804881a89aa14c2, type: 2}
+  cloud: {fileID: 0}
   itemSprite: {fileID: 485263040}
   orderSystem: {fileID: 1821361448}
   interactArea: {fileID: 2076417885}
+  order: {fileID: 0}
+  state: 
+  orderSprites: 0
+  orderComplete: 0
 --- !u!212 &1422962378
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2537,7 +2542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1784944329
 BoxCollider2D:
   m_ObjectHideFlags: 0

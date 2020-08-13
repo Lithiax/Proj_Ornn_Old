@@ -14,9 +14,7 @@ public static class PlayerData
         }
         set
         {
-            Debug.Log("old:" + PlayerData.playerPosition);
             position = value;
-            Debug.Log("new:" + PlayerData.playerPosition);
         }
     }
 }
