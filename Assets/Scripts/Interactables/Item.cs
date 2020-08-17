@@ -8,14 +8,16 @@ public class Item : ScriptableObject
     public new string name;
     public Sprite sprite;
     public string job;
-    public string[] recipe;
+    public string[] tool;
+    public string type;
+    private bool completed;
 
     public void printRecipe()
     {
-        if (recipe != null)
-            foreach (string recipes in recipe)
+        if (tool != null)
+            foreach (string tools in tool)
             {
-                Debug.Log(recipes);
+                Debug.Log(tools);
             }
     }
 }

@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     SpriteRenderer spr;
 
-    public string currentOrder;
+    public Item itemHeld;
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
         transform.position = PlayerData.playerPosition;
     }
-
 
     void Update()
     {
@@ -33,6 +32,18 @@ public class PlayerController : MonoBehaviour
             spr.flipX = true;
         if (movement.x < 0)
             spr.flipX = false;
+    }
+
+    public Item giveItem
+    {
+        get
+        {
+            return itemHeld;
+        }
+        set
+        {
+            itemHeld = value;
+        }
     }
 
     void FixedUpdate()

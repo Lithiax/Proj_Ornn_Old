@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Anvil : Interactable
 {
     CircleCollider2D circCol;
-
+    public PlayerController player;
     void Start()
     {
         
@@ -16,8 +16,19 @@ public class Anvil : Interactable
     {
         if (interact())
         {
-            SceneManager.LoadScene("Wl_Anvil");
-            Debug.Log("Pressed E");
+            use();
         }
+    }
+
+    public void use()
+    {
+        if (player.itemHeld != null)
+            foreach (string tools in player.itemHeld.tool)
+            {
+                if (tools == "anvil")
+                    SceneManager.LoadScene("Wl_Anvil");
+            }
+        else
+            return;
     }
 }
