@@ -15,7 +15,7 @@ public class AnvilGame : MonoBehaviour
         {
             keys.Add ( keyPool[Random.Range(0, 3)]);
             keys[i] = Instantiate(keys[i], transform.position + new Vector3(0, 0 + (i * 0.80f), 0), transform.rotation);
-        }    
+        }
     }
 
     void Update()
@@ -39,6 +39,7 @@ public class AnvilGame : MonoBehaviour
 
         if (!keys.Any())
         {
+            PlayerData.getItemHeld = PlayerData.getItemHeld.upgrade;
             SceneManager.LoadScene("Woodlands");
         }
     }

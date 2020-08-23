@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewItem", menuName = "Item")]
 public class Item : ScriptableObject
 {
+    public Item upgrade;
     public new string name;
     public Sprite sprite;
     public string job;

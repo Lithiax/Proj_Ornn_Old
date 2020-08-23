@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spr;
 
     public Item itemHeld;
+    public GameObject itemDebugger;
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spr = GetComponent<SpriteRenderer>();
         transform.position = PlayerData.playerPosition;
+        itemHeld = PlayerData.getItemHeld;
     }
 
     void Update()
@@ -32,6 +34,15 @@ public class PlayerController : MonoBehaviour
             spr.flipX = true;
         if (movement.x < 0)
             spr.flipX = false;
+    }
+
+    private void itemDebug()
+    {
+        if (itemHeld != null)
+        {
+            itemDebugger.GetComponent<SpriteRenderer>().sprite = itemHeld.sprite;
+        }
+            
     }
 
     public Item giveItem
@@ -54,5 +65,6 @@ public class PlayerController : MonoBehaviour
     void OnDestroy()
     {
         PlayerData.playerPosition = transform.position;
+        PlayerData.getItemHeld = itemHeld;
     }
 }

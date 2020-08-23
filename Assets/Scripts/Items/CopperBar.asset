@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215344aedb7a2f74aa01030b64814906, type: 3}
   m_Name: CopperBar
   m_EditorClassIdentifier: 
+  upgrade: {fileID: 11400000, guid: 6ac80fc1816a39e4b804881a89aa14c2, type: 2}
   name: Copper Bar
   sprite: {fileID: 21300000, guid: 70e131c46f4b74540a66cb0257dfb956, type: 3}
   job: all
