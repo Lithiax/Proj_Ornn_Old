@@ -11,6 +11,7 @@ public class SupplyBox : Interactable
         if (interact())
         {
             player.giveItem = item;
+            player.changeItemHeldSprite();
         }
     }
 }

@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
         transform.position = PlayerData.playerPosition;
         itemHeld = PlayerData.getItemHeld;
+        if (itemHeld != null)
+            changeItemHeldSprite();
     }
 
     void Update()
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
             spr.flipX = false;
     }
 
-    private void itemDebug()
+    public void changeItemHeldSprite()
     {
         if (itemHeld != null)
         {
